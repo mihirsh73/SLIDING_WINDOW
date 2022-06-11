@@ -1,0 +1,31 @@
+ // LOGIC MAXIMUM SIZE OF SUBARRAY WHOSE SUM IS SUM-X
+ //You are given an integer array nums and an integer x. In one operation, you can either remove the leftmost or the rightmost element from the array nums and subtract its value from x. Note that this modifies the array for future operations.
+
+Return the minimum number of operations to reduce x to exactly 0 if it is possible, otherwise, return -1.
+ int minOperations(vector<int>& nums, int x) {
+        int sum=0;
+        for(int i=0; i<nums.size(); i++)
+        {
+            sum +=nums[i];
+        }
+        int n= nums.size();
+        if(sum<x)return -1;
+        int count=INT_MAX;
+        int sum1=0;
+        int j=0;
+        for(int i=0; i<nums.size(); i++)
+        {
+            sum1 += nums[i];
+          while(sum1>sum-x)
+            {
+                sum1 -=nums[j];
+              j++;
+            }
+            if(sum1==sum-x){
+           count = min(count,n-(i-j+1));
+        }
+        }
+        return count==INT_MAX?-1:count;
+        
+    }
+    // TC O(N) SC O(1)
